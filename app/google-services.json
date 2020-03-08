@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1062252723229",
+    "firebase_url": "https://coba-auth-79ce5.firebaseio.com",
+    "project_id": "coba-auth-79ce5",
+    "storage_bucket": "coba-auth-79ce5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062252723229:android:cea8c48056c9e0e5929af4",
+        "android_client_info": {
+          "package_name": "grevi.msx.mytest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062252723229-otn7350huj015fgnungtdn98d2bfaff8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "grevi.msx.mytest",
+            "certificate_hash": "14d3f6023809e35439c7eb58940525db66517913"
+          }
+        },
+        {
+          "client_id": "1062252723229-4h1bk309cdpcvvj525179tp3smqkv130.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnOe6meW_BUfBPtA2NcyyWvwnZjT1tN7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062252723229-4h1bk309cdpcvvj525179tp3smqkv130.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

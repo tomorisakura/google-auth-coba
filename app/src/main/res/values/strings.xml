@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Test</string>
+    <string name="sign_in">Masuk Dengan Google</string>
+    <string name="log_out">Log Out</string>
+</resources>
