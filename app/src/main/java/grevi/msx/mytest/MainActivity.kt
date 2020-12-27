@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -50,25 +51,32 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN) {
             val task : Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val akun = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(akun)
-            } catch (e : ApiException) {
-
+            if (task.isSuccessful) {
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    Log.d("onActivityResult_FB", "firebaseAuthWithGoogle:" + account.id)
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } catch (e : ApiException) {
+                    Log.e("onActivityResult_FB", e.toString())
+                }
+            } else {
+                toast(task.exception.toString())
+                Log.e("TASK_EXCEPTION", task.exception.toString())
             }
         }
     }
 
-    private fun firebaseAuthWithGoogle(akun: GoogleSignInAccount?) {
-        val credential = GoogleAuthProvider.getCredential(akun?.idToken, null)
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener{
+    private fun firebaseAuthWithGoogle(idToken : String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener{
             if (it.isSuccessful) {
                 val mIntent = Intent(this, HomeActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 }
                 startActivity(mIntent)
             } else {
-                Toast.makeText(this, "Gagal Masuk Dengan Google", Toast.LENGTH_SHORT).show()
+                toast("Gagal login failure")
             }
         }
     }
@@ -83,5 +91,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(mIntent)
             finish()
         }
+    }
+
+    private fun toast(msg : String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }
